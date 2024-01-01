@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
-using Bogus;
 using CheckedListBoxExtensionsApp.Classes;
 using CommonLibrary.LanguageExtensions;
 using CommonLibrary.Models;
+using static CommonLibrary.Classes.JsonHelpers;
+
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
 
 
 namespace CheckedListBoxExtensionsApp;
@@ -50,8 +52,8 @@ public partial class CheckedToListForm : Form
         if (_bindingListRight.Count > 0)
         {
             // Using a NuGet package dump the list to Visual Studio's output window rather than a foreach
-            var personsDump = ObjectDumper.Dump(_bindingSourceRight, DumpStyle.CSharp);
-            Debug.WriteLine(personsDump);
+            var dump = ObjectDumper.Dump(_bindingSourceRight, DumpStyle.CSharp);
+            Debug.WriteLine(dump);
         }
     }
 
@@ -67,5 +69,22 @@ public partial class CheckedToListForm : Form
         }
     }
 
+    private void ReadSaveListBoxButton_Click(object sender, EventArgs e)
+    {
+        var fileName = "ProductsList.json";
+        _bindingListRight.SaveToFile<Product>(fileName);
 
+        var json = File.ReadAllText(fileName);
+        var products = Deserialize<Product>(json);
+        if (products.Count > 0)
+        {
+            var dump = ObjectDumper.Dump(products, DumpStyle.CSharp);
+            Debug.WriteLine($"{dump}{Environment.NewLine}");
+        }
+        else
+        {
+            Debug.WriteLine("Nothing to show");
+        }
+
+    }
 }

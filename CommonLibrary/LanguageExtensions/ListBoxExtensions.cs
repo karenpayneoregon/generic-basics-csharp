@@ -3,6 +3,8 @@ using System.Data;
 using System.Text.Json;
 using CommonLibrary.Classes;
 using CommonLibrary.JsonConverters;
+using CommonLibrary.Models;
+using static System.Net.Mime.MediaTypeNames;
 
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 
@@ -32,9 +34,27 @@ namespace CommonLibrary.LanguageExtensions
             }));
         }
 
+        public static void SaveToFile1<T>(this BindingList<T> sender, string FileName)
+        {
+            JsonSerializerOptions options = new()
+            {
+                WriteIndented = true,
+                Converters = { new FixedDecimalJsonConverter() }
+            };
+            File.WriteAllText(FileName, JsonSerializer.Serialize(sender,options));
+        }
+
+        public static void Read<T>(string fileName)
+        {
+            var json = File.ReadAllText(fileName);
+            var jsonOptions = new JsonSerializerOptions();
+            jsonOptions.Converters.Add(new QuotedDecimalConverter());
+            var root = JsonSerializer.Deserialize<List<T>>(json, jsonOptions);
+        }
+
         public static void SaveToFile<T>(this Control sender, string FileName)
         {
-
+            var test = sender;
             List<T>? list;
             if (sender.IsComboBox())
             {
@@ -54,6 +74,7 @@ namespace CommonLibrary.LanguageExtensions
                 WriteIndented = true,
                 Converters = { new FixedDecimalJsonConverter() }
             }));
+
 
         }
 
