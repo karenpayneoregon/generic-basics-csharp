@@ -7,41 +7,40 @@ namespace AskConsoleApp1.Classes
 {
     public class Prompts
     {
-        /// <summary>
-        /// Example to get a date and allow no entry with custom error message
-        /// </summary>
-        public static DateTime? GetBirthDate() =>
-            AnsiConsole.Prompt(
-                new TextPrompt<DateTime>("What is your [white]birth date[/]?")
-                    .PromptStyle("yellow")
-                    .ValidationErrorMessage("[red]Please enter a valid date or press ENTER to not enter a date[/]")
-                    .Validate(dateTime => dateTime.Year switch
-                    {
-                          >= 2001 => ValidationResult.Error("[red]Must be less than 2001[/]"),
-                        _ => ValidationResult.Success(),
-                    })
-                    .AllowEmpty());
 
-        /// <summary>
-        /// Ask for first name with custom validation error text
-        /// </summary>
         public static string GetFirstName() =>
             AnsiConsole.Prompt(
                 new TextPrompt<string>("[white]First name[/]?")
                     .PromptStyle("yellow")
-                    .ValidationErrorMessage("[red]Please enter your first name[/]"));
+                    .AllowEmpty());
 
 
-        /// <summary>
-        /// Ask for last name with custom validation error text
-        /// </summary>
+
         public static string GetLastName() =>
             AnsiConsole.Prompt(
                 new TextPrompt<string>("[white]Last name[/]?")
                     .PromptStyle("yellow")
-                    .ValidationErrorMessage("[red]Please enter your last name[/]"));
+                    .AllowEmpty());
 
-        public static T GetInput<T>(string text) => AnsiConsole.Prompt(new TextPrompt<T>($"[white]{text}[/]?").AllowEmpty().PromptStyle("yellow"));
+
+        public static DateOnly? GetBirthDate() =>
+            AnsiConsole.Prompt(
+                new TextPrompt<DateOnly>("What is your [white]birth date[/]?")
+                    .PromptStyle("yellow")
+                    .AllowEmpty());
+
+
+
+
+        public static T GetInput<T>(string text) => 
+            AnsiConsole.Prompt(new TextPrompt<T>($"[white]{text}[/]?")
+                .AllowEmpty()
+                .PromptStyle("yellow"));
+
+
+
+
+
 
 
 

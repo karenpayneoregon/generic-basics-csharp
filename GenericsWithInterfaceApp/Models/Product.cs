@@ -1,7 +1,5 @@
 ﻿#pragma warning disable CS8618
-using System.Text.Json.Serialization;
-
-namespace CommonLibrary.Models;
+namespace GenericsWithInterfaceApp.Models;
 
 public class Product
 {

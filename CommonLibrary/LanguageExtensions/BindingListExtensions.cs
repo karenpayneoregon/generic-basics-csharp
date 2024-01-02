@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using CommonLibrary.JsonConverters;
+using System.ComponentModel;
+using System.Text.Json;
 
 namespace CommonLibrary.LanguageExtensions;
 
@@ -29,5 +31,26 @@ public static class BindingListExtensions
         {
             list.RaiseListChangedEvents = true;
         }
+    }
+
+    public static void SaveToFile<T>(this BindingList<T> sender, string FileName)
+    {
+        File.WriteAllText(FileName, JsonSerializer.Serialize(sender, new JsonSerializerOptions
+        {
+            WriteIndented = true,
+            Converters = { new FixedDecimalJsonConverter() }
+        }));
+    }
+
+    public static void SaveToFile1<T>(this BindingList<T> sender, string FileName)
+    {
+
+        JsonSerializerOptions options = new()
+        {
+            WriteIndented = true,
+            Converters = { new FixedDecimalJsonConverter() }
+        };
+
+        File.WriteAllText(FileName, JsonSerializer.Serialize(sender, options));
     }
 }
