@@ -6,31 +6,21 @@ This Visual Studio solution is about reuse of code in a class project along with
 
 If a web project were used this does not help a desktop developer but a web developer can learn how to use generics and if a console project were used it gets complicated, a menu would need to be created possibly with sub menus which takes to long for the time I wanted to devote to this code.
 
+Below there is a single web project code sample for using two generic language extension methods.
+
 ## ASP.NET Core/Razor pages
 
 Let's look at an example for generics. The follow code are extension methods for working with temp data using the same idea done in Window Forms.
 
+The Razor project WorkingWithDates shows how to use the Put and Get extension methods.
+
 ```csharp
 public static class TempDataHelper
 {
-    /// <summary>
-    /// Put an item into TempData
-    /// </summary>
-    /// <typeparam name="T">Item type</typeparam>
-    /// <param name="sender">TempData</param>
-    /// <param name="key">Used to retrieve value with <see cref="Get{T}"/> </param>
-    /// <param name="value">Value to store</param>
     public static void Put<T>(this ITempDataDictionary sender, string key, T value) where T : class
     {
         sender[key] = JsonConvert.SerializeObject(value);
     }
-    /// <summary>
-    /// Get value by key in TempData
-    /// </summary>
-    /// <typeparam name="T">Item type</typeparam>
-    /// <param name="sender">TempData</param>
-    /// <param name="key">Used to retrieve value</param>
-    /// <returns>Item</returns>
     public static T Get<T>(this ITempDataDictionary sender, string key) where T : class
     {
         sender.TryGetValue(key, out var unknown);

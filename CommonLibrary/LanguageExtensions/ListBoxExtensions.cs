@@ -34,13 +34,20 @@ namespace CommonLibrary.LanguageExtensions
             }));
         }
 
+        private static readonly JsonSerializerOptions serializerOptions = new()
+        {
+            Converters = { new FixedDecimalJsonConverter() }
+        };
+
         public static void SaveToFile1<T>(this BindingList<T> sender, string FileName)
         {
+
             JsonSerializerOptions options = new()
             {
                 WriteIndented = true,
                 Converters = { new FixedDecimalJsonConverter() }
             };
+
             File.WriteAllText(FileName, JsonSerializer.Serialize(sender,options));
         }
 
