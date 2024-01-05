@@ -1,8 +1,8 @@
 ﻿using System;
-using static BaseDataValidatorLibrary.Helpers.ValidationHelper;
 using AskConsoleApp1.Classes;
 using AskConsoleApp1.Models;
 using Spectre.Console;
+using static ValidatorLibrary.ValidationHelper;
 
 namespace AskConsoleApp1;
 
@@ -19,7 +19,7 @@ partial class Program
         var (success, container) = IsValidEntity(person);
         if (success)
         {
-            AnsiConsole.MarkupLine("[yellow]Valid person");
+            AnsiConsole.MarkupLine("[yellow]Valid person[/]");
         }
         else
         {
