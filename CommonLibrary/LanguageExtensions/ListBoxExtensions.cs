@@ -25,8 +25,9 @@ public static class ListBoxExtensions
         File.WriteAllLines(FileName, sender.Cast<string>().Select(Row => Row).ToArray());
     }
 
-    private static readonly JsonSerializerOptions serializerOptions = new()
+    private static readonly JsonSerializerOptions serializerWriteOptions = new()
     {
+        WriteIndented = true,
         Converters = { new FixedDecimalJsonConverter() }
     };
 
@@ -40,9 +41,8 @@ public static class ListBoxExtensions
         var root = JsonSerializer.Deserialize<List<T>>(json, jsonOptions);
     }
 
-    public static void SaveToFile<T>(this Control sender, string FileName)
+    public static void SaveToFile<T>(this Control sender, string fileName)
     {
-        var test = sender;
         List<T>? list;
         if (sender.IsComboBox())
         {
@@ -57,13 +57,8 @@ public static class ListBoxExtensions
             throw new Exception("Control must be a ComboBox or ListBox");
         }
 
-        File.WriteAllText(FileName, JsonSerializer.Serialize(list, new JsonSerializerOptions
-        {
-            WriteIndented = true,
-            Converters = { new FixedDecimalJsonConverter() }
-        }));
-
-
+        File.WriteAllText(fileName, JsonSerializer.Serialize(list, serializerWriteOptions));
+        
     }
 
     /// <summary>

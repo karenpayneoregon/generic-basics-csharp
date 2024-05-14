@@ -1,8 +1,7 @@
-﻿using CommonLibrary.JsonConverters;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Text.Json;
 
-namespace CommonLibrary.LanguageExtensions;
+namespace BindingListJsonSample.Classes;
 
 /// <summary>
 /// Not used in the example but think it can be useful in rate cases
@@ -48,8 +47,7 @@ public static class BindingListExtensions
     private static JsonSerializerOptions Options =>
         new()
         {
-            WriteIndented = true,
-            Converters = { new FixedDecimalJsonConverter() }
+            WriteIndented = true
         };
 
 }
