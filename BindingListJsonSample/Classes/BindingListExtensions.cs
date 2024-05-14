@@ -33,11 +33,23 @@ public static class BindingListExtensions
         }
     }
 
+    /// <summary>
+    /// Save list to a json file
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="sender"></param>
+    /// <param name="fileName">File name to save list too</param>
     public static void SaveToFile<T>(this BindingList<T> sender, string fileName)
     {
         File.WriteAllText(fileName, JsonSerializer.Serialize(sender, Options));
     }
 
+    /// <summary>
+    /// Read list from a json file
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="sender"></param>
+    /// <param name="fileName">File name to read from</param>
     public static void ReadFromFile<T>(this BindingList<T> sender, string fileName)
     {
         var json = File.ReadAllText(fileName);

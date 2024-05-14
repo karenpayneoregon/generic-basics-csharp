@@ -4,8 +4,16 @@ using Bogus.DataSets;
 
 namespace BindingListJsonSample.Classes;
 
+/// <summary>
+/// Responsible for creating a list of customers
+/// </summary>
 public class BogusOperations
 {
+    /// <summary>
+    /// Create list of customers
+    /// </summary>
+    /// <param name="count">Count of customers to create, if not passed 10 will be generated</param>
+    /// <returns>List of Customers</returns>
     public static List<Customer> CustomersList(int count = 10)
     {
 
