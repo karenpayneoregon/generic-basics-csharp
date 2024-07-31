@@ -1,5 +1,6 @@
 ﻿
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using BindingListJsonSample.Classes;
 using BindingListJsonSample.Models;
 
@@ -16,6 +17,7 @@ internal partial class Program
 
     static void Main(string[] args)
     {
+
         var customers = BogusOperations.CustomersList();
 
         _customers = new BindingList<Customer>(customers);
@@ -84,4 +86,5 @@ internal partial class Program
         return table;
 
     }
+
 }

@@ -14,8 +14,6 @@ namespace AskConsoleApp1.Classes
                     .PromptStyle("yellow")
                     .AllowEmpty());
 
-
-
         public static string GetLastName() =>
             AnsiConsole.Prompt(
                 new TextPrompt<string>("[white]Last name[/]?")
@@ -29,19 +27,11 @@ namespace AskConsoleApp1.Classes
                     .PromptStyle("yellow")
                     .AllowEmpty());
 
-
-
-
+        
         public static T GetInput<T>(string text) => 
             AnsiConsole.Prompt(new TextPrompt<T>($"[white]{text}[/]?")
                 .AllowEmpty()
                 .PromptStyle("yellow"));
-
-
-
-
-
-
 
 
         /// <summary>

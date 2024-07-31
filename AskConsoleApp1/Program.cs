@@ -15,7 +15,7 @@ partial class Program
         var lastName = Prompts.GetInput<string>("Last name");
         var birthDate = Prompts.GetInput<DateOnly>("Birth date");
 
-        Person person = new Person() { FirstName = firstName, LastName = lastName, BirthDate = birthDate };
+        Person person = new() { FirstName = firstName, LastName = lastName, BirthDate = birthDate };
         var (success, container) = IsValidEntity(person);
         if (success)
         {

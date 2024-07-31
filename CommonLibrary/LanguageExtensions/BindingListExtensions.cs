@@ -24,9 +24,7 @@ public static class BindingListExtensions
         {
             list.RaiseListChangedEvents = false;
             foreach (T item in data)
-            {
                 list.Add(item);
-            }
         }
         finally
         {
@@ -41,8 +39,7 @@ public static class BindingListExtensions
 
     public static void ReadFromFile<T>(this BindingList<T> sender, string fileName)
     {
-        var json = File.ReadAllText(fileName);
-        sender.AddRange(JsonSerializer.Deserialize<List<T>>(json));
+        sender.AddRange(JsonSerializer.Deserialize<List<T>>(File.ReadAllText(fileName)));
     }
 
     private static JsonSerializerOptions Options =>
